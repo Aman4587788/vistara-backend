@@ -22,6 +22,20 @@ const PORT = process.env.PORT || 5000
 // Connect to MongoDB
 connectDB()
 
+// Root route
+app.get('/', (req, res) => {
+  res.send(`
+    <div style="font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #050505; color: white; text-align: center;">
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">🚀 Vistara API</h1>
+      <p style="color: #888; font-size: 1.2rem;">The backend is live and running perfectly.</p>
+      <div style="margin-top: 20px; padding: 20px; border: 1px solid #333; border-radius: 10px; background: #0a0a0a;">
+        <p><strong>Health Check:</strong> <a href="/api/health" style="color: #fff;">/api/health</a></p>
+        <p><strong>Status:</strong> <span style="color: #4ade80;">Online</span></p>
+      </div>
+    </div>
+  `);
+});
+
 // Middleware
 app.use(cors({
   origin: (origin, callback) => {
