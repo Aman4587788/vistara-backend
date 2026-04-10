@@ -23,7 +23,22 @@ const PORT = process.env.PORT || 5000
 connectDB()
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials: true }))
+const allowedOrigins = [
+  process.env.CLIENT_URL || 'http://localhost:3000',
+  'https://vistara-cart.vercel.app',
+  /\.vercel\.app$/,
+]
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true) // allow server-to-server
+    const allowed = allowedOrigins.some(o =>
+      typeof o === 'string' ? o === origin : o.test(origin)
+    )
+    if (allowed) callback(null, true)
+    else callback(new Error('Not allowed by CORS'))
+  },
+  credentials: true
+}))
 app.use(express.json())
 
 // Health check
