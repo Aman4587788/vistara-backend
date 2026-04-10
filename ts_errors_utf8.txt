@@ -1,0 +1,2 @@
+﻿src/controllers/authController.ts(4,30): error TS2307: Cannot find module 'google-auth-library' or its corresponding type declarations.
+src/utils/sendEmail.ts(1,24): error TS2307: Cannot find module 'nodemailer' or its corresponding type declarations.
